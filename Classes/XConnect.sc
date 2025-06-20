@@ -51,11 +51,13 @@ XConnect {
 	}
 
 	publishProtocol {
+			var actions, proxies, tasks, protocol;
+
 		if (myProtocol.notNil) {
-			var actions = myProtocol.actions;
-			var proxies = myProtocol.proxies;
-			var tasks = myProtocol.tasks;
-			var protocol = [];
+			actions = myProtocol.actions;
+			proxies = myProtocol.proxies;
+			tasks = myProtocol.tasks;
+			protocol = [];
 			if (actions.notNil) {
 				actions.keysValuesDo {|key, value|
 					value.xpublish(key, xoo);
@@ -130,10 +132,9 @@ XConnect {
 			var user = msg[1];
 			var xpeer = XPeer(user, this);
 			var protocol = ();
-			var typ, elements;
+			var typ, elements, classTyp;
 			msg = msg[2..].reverse.postln;
 			while { msg.isEmpty.not } {
-				var classTyp;
 				typ = msg.pop;
 				elements = msg.pop;
 				if (typ.isKindOf(Symbol).not) {
